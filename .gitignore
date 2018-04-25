@@ -1,5 +1,8 @@
 .metadata
+
+
 .sonarlint
+**/.recommenders
 **/.settings
 **/build
 RemoteSystemsTempFiles
