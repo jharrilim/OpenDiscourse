@@ -17,9 +17,6 @@ public class Topic implements TopicRemote, TopicLocal, Serializable {
 	private int id;
 	private String topicValue;
 
-	public Topic() {
-	}
-
 	public int getId() {
 		return id;
 	}
