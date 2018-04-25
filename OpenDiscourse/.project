@@ -4,7 +4,6 @@
 	<comment></comment>
 	<projects>
 		<project>OpenDiscourseWeb</project>
-		<project>OpenDiscourseEJB</project>
 		<project>OpenDiscourseJPA</project>
 	</projects>
 	<buildSpec>

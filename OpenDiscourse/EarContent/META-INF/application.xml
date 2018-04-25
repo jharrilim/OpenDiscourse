@@ -7,7 +7,4 @@
       <context-root>OpenDiscourseWeb</context-root>
     </web>
   </module>
-  <module>
-    <ejb>OpenDiscourseEJB.jar</ejb>
-  </module>
 </application>
