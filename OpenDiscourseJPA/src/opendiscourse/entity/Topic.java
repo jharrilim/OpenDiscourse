@@ -12,7 +12,8 @@ import java.util.List;
 @Entity
 @NamedQuery(name="Topic.findAll", query="SELECT t FROM Topic t")
 public class Topic implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1490476297228543367L;
 
 	@Id
 	private int idTopic;

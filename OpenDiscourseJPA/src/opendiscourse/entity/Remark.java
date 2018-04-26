@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Entity
 @NamedQuery(name="Remark.findAll", query="SELECT r FROM Remark r")
 public class Remark implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 5732430699501331800L;
 
 	@Id
 	private int idremark;
