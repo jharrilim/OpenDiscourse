@@ -19,6 +19,8 @@ public class Remark implements Serializable {
 
 	private String remarkValue;
 
+	private boolean against;
+	
 	private int thumbsDown;
 
 	private int thumbsUp;
@@ -27,9 +29,6 @@ public class Remark implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idTopic")
 	private Topic topic;
-
-	public Remark() {
-	}
 
 	public int getIdremark() {
 		return this.idremark;
@@ -69,6 +68,14 @@ public class Remark implements Serializable {
 
 	public void setTopic(Topic topic) {
 		this.topic = topic;
+	}
+
+	public boolean isAgainst() {
+		return against;
+	}
+
+	public void setAgainst(boolean against) {
+		this.against = against;
 	}
 
 }
