@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import opendiscourse.dao.TopicService;
+import opendiscourse.entity.Remark;
 import opendiscourse.entity.Topic;
 
 /**
@@ -33,7 +34,9 @@ public class HomeServlet extends HttpServlet {
 		try {
 			List<Topic> topics = TopicService.all();
 			for(Topic topic : topics) {
-				LOGGER.log(Level.INFO, "topic: " + topic.getTopicValue());				
+				LOGGER.log(Level.INFO, "topic: " + topic.getTopicValue());	
+				for(Remark remark: topic.getRemarks())
+					LOGGER.log(Level.INFO, "Remark: " + remark.getRemarkValue());
 			}
 			request.setAttribute("topics", topics);
 			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);

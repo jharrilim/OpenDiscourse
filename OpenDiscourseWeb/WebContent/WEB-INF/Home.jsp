@@ -24,6 +24,7 @@
 							<div>
 								<c:out value="${ pro.getRemarkValue() }"></c:out>
 							</div>
+							<hr />
 						</c:forEach>
 					</div>
 					<div class="col-6">
@@ -31,23 +32,27 @@
 							<div class="text-xs-right">
 								<c:out value="${ con.getRemarkValue() }"></c:out>
 							</div>
+							<hr />
 						</c:forEach>
 					</div>
 				</div>
 			</div>
 			<div class="card-footer">
 				<span class="card-subtitle">Post Remark</span>
-				<form action="${pageContext.request.contextPath}/AddTopic">
-				<div class="row">
-					<textarea class="form-control col-xs-12"></textarea>
-				</div>
-				<div class="row">
-					<div class="radio col-xs-4">
-						<label><input type="radio" name="topicType" />For</label>
-						<label><input type="radio" name="topicType" />Against</label>
-					</div>								
-					<input class="btn btn-lg btn-outline-primary float-right pull-right" type="submit" value="Submit" />
-				</div>				
+				<form action="${pageContext.request.contextPath}/AddRemark" method="POST">
+					<input type="hidden" name="topicId" value="${ topic.getIdTopic() }" />
+					<div class="row">
+						<textarea class="form-control col-xs-12" name="remarkValue"></textarea>
+					</div>
+					<div class="row">
+						<div id="topicBtnGrp" class="btn btn-group-toggle col-xs-4" data-toggle="buttons">
+							<label class="btn btn-secondary active"><input type="radio" name="topicType" id="typeFor" value="for" checked />For</label>
+							<label class="btn btn-secondary"><input type="radio" name="topicType" id="typeAgainst" value="against" />Against</label>
+						</div>								
+						<div class="col-xs-8">
+							<input class="btn btn-lg btn-outline-primary pull-right text-right" type="submit" value="Submit" />
+						</div>
+					</div>	
 				</form>
 			</div>
 		</div>

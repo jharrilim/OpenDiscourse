@@ -15,6 +15,7 @@ public class Remark implements Serializable {
 	private static final long serialVersionUID = 5732430699501331800L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idremark;
 
 	private String remarkValue;
