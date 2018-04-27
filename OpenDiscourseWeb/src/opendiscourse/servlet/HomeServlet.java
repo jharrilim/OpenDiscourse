@@ -21,22 +21,13 @@ import opendiscourse.entity.Topic;
 urlPatterns = { "/Index", "/", "Home" })
 public class HomeServlet extends HttpServlet {
 
-
 	private static final long serialVersionUID = -8842471261332777447L;
 	private static final Logger LOGGER = Logger.getLogger(HomeServlet.class.getName());
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public HomeServlet() {
 		super();
 	}
 
-	/**
-	 * Fetches the home page.
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -57,10 +48,6 @@ public class HomeServlet extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		doGet(request, response);

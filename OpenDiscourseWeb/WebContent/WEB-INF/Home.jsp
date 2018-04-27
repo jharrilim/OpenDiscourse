@@ -38,14 +38,16 @@
 			<div class="card-footer">
 				<span class="card-subtitle">Post Remark</span>
 				<form action="${pageContext.request.contextPath}/AddTopic">
+				<div class="row">
 					<textarea class="form-control col-xs-12"></textarea>
-					<div class="radio">
+				</div>
+				<div class="row">
+					<div class="radio col-xs-4">
 						<label><input type="radio" name="topicType" />For</label>
-					</div>
-					<div>
 						<label><input type="radio" name="topicType" />Against</label>
 					</div>								
-					<input class="btn btn-lg btn-outline-primary float-right" type="submit" value="Submit" />
+					<input class="btn btn-lg btn-outline-primary float-right pull-right" type="submit" value="Submit" />
+				</div>				
 				</form>
 			</div>
 		</div>
