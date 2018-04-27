@@ -17,7 +17,8 @@ import opendiscourse.entity.Topic;
 /**
  * For the main page of the OpenDiscourse application.
  */
-@WebServlet(description = "Access the main page of the application.", urlPatterns = { "/HomeServlet", "/" })
+@WebServlet(description = "Access the main page of the application.", 
+urlPatterns = { "/Index", "/", "Home" })
 public class HomeServlet extends HttpServlet {
 
 
