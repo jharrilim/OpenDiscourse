@@ -27,8 +27,11 @@
 <body class="h-100">
 
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark hidden-sm-down justify-content-between">
-		<a class="navbar-brand" href="/">( | )OpenDiscourse</a>
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/">( | )OpenDiscourse</a>
 		<form class="form-inline my-2 my-lg-0">
+			<c:if test="${ user }">
+				<span class="navbar-text"><c:out value="${ user.getUsername() }"></c:out></span>
+			</c:if>
 	    	<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 	    	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
@@ -71,6 +74,22 @@
 									<span class="d-none d-md-inline">&nbsp;Favourites</span>
 								</a>
 							</li>
+							<c:choose>
+								<c:when test="${ empty user }">
+							<li class="nav-item">
+								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Auth/Login">
+									<i class="fa fa-sign-in-alt fa-fw"></i>
+									<span class="d-none d-md-inline">&nbsp;Login</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Auth/Register">
+									<i class="fa fa-user-plus fa-fw"></i>
+									<span class="d-none d-md-inline">&nbsp;Register</span>
+								</a>
+							</li>
+								</c:when>
+								<c:otherwise>
 							<li class="nav-item">
 								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Profile">
 									<i class="fa fa-user fa-fw"></i>
@@ -78,13 +97,15 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Logout">
-									<i class="fa fa-list fa-fw"></i>
+								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Auth/Logout">
+									<i class="fa fa-sign-out-alt fa-fw"></i>
 									<span class="d-none d-md-inline">&nbsp;Logout</span>
 								</a>
 							</li>
+								</c:otherwise>
+							</c:choose>
 						</ul>
 					</div>
 				</nav>
 			</aside>
-			<main class="col bg-faded py-3">
+			<main class="col bg-faded py-3" style="overflow-y:scroll;">

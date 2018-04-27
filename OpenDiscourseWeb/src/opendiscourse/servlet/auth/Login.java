@@ -13,12 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import opendiscourse.dao.TopicService;
 import opendiscourse.entity.Topic;
+import opendiscourse.entity.User;
 import opendiscourse.servlet.common.HomeServlet;
 
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/Login")
+@WebServlet("/Auth/Login")
 public class Login extends HttpServlet {
 
 	private static final long serialVersionUID = 6085682488301638703L;
@@ -29,7 +30,7 @@ public class Login extends HttpServlet {
 		try {
 			List<Topic> topics = TopicService.all();
 			request.setAttribute("topics", topics);
-			request.getRequestDispatcher("WEB-INF/auth/Login.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
 			
 		} catch (ServletException | IOException e) {
 			try {
@@ -43,8 +44,12 @@ public class Login extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		User user = new User();
+		user.setUsername(request.getParameter("username"));
+		user.setPassword(request.getParameter("password"));
+		user.setEmail(request.getParameter("email"));
+		TopicService.registerUser(user);
+		request.getSession().setAttribute("user", user);
 		try {
 			response.sendRedirect(request.getRequestURI());			
 		}

@@ -4,18 +4,17 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the user database table.
  * 
  */
 @Entity
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int iduser;
 
 	private String email;
@@ -24,21 +23,14 @@ public class User implements Serializable {
 
 	private String username;
 
-	//bi-directional many-to-many association to Topic
+	// bi-directional many-to-many association to Topic
 	@ManyToMany
-	@JoinTable(
-		name="user_topics"
-		, joinColumns={
-			@JoinColumn(name="iduser")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="idtopic")
-			}
-		)
+	@JoinTable(name = "user_topics", joinColumns = { @JoinColumn(name = "iduser") }, inverseJoinColumns = {
+			@JoinColumn(name = "idtopic") })
 	private List<Topic> topics;
 
-	//bi-directional many-to-one association to UserTopic
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to UserTopic
+	@OneToMany(mappedBy = "user")
 	private List<UserTopic> userTopics;
 
 	public User() {

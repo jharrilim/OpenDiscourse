@@ -19,7 +19,7 @@ import opendiscourse.entity.Topic;
  * For the main page of the OpenDiscourse application.
  */
 @WebServlet(description = "Access the main page of the application.", 
-urlPatterns = { "/Index", "/", "Home" })
+urlPatterns = { "/Index", "/", "/Home" })
 public class HomeServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -8842471261332777447L;
@@ -30,7 +30,7 @@ public class HomeServlet extends HttpServlet {
 		try {
 			List<Topic> topics = TopicService.all();
 			request.setAttribute("topics", topics);
-			request.getRequestDispatcher("WEB-INF/Home.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
 			
 		} catch (ServletException | IOException e) {
 			try {
@@ -39,7 +39,6 @@ public class HomeServlet extends HttpServlet {
 				LOGGER.log(Level.SEVERE, "Malformed Response", e1);
 			}
 		}
-
 	}
 
 	@Override
