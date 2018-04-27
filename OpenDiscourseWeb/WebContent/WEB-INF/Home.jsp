@@ -7,7 +7,7 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-header">
-				<span><c:out value="${ topic.getTopicValue() }"></c:out></span>
+				<span class="card-title"><c:out value="${ topic.getTopicValue() }"></c:out></span>
 			</div>
 			<div class="card-body">
 				<div class="row">
@@ -34,6 +34,19 @@
 						</c:forEach>
 					</div>
 				</div>
+			</div>
+			<div class="card-footer">
+				<span class="card-subtitle">Post Remark</span>
+				<form action="${pageContext.request.contextPath}/AddTopic">
+					<textarea class="form-control col-xs-12"></textarea>
+					<div class="radio">
+						<label><input type="radio" name="topicType" />For</label>
+					</div>
+					<div>
+						<label><input type="radio" name="topicType" />Against</label>
+					</div>								
+					<input class="btn btn-lg btn-outline-primary float-right" type="submit" value="Submit" />
+				</form>
 			</div>
 		</div>
 	</div>
