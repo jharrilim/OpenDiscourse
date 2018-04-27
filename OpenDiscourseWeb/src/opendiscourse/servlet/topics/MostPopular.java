@@ -1,4 +1,4 @@
-package opendiscourse.servlet;
+package opendiscourse.servlet.topics;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MostRecent
+ * Servlet implementation class MostPopular
  */
-@WebServlet("/Topics/Recent")
-public class MostRecent extends HttpServlet {
+@WebServlet("/Topics/Popular")
+public class MostPopular extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override

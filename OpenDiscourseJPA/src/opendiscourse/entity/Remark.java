@@ -11,17 +11,15 @@ import javax.persistence.*;
 @Entity
 @NamedQuery(name="Remark.findAll", query="SELECT r FROM Remark r")
 public class Remark implements Serializable {
-
-	private static final long serialVersionUID = 5732430699501331800L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idremark;
+
+	private boolean against;
 
 	private String remarkValue;
 
-	private boolean against;
-	
 	private int thumbsDown;
 
 	private int thumbsUp;
@@ -37,6 +35,14 @@ public class Remark implements Serializable {
 
 	public void setIdremark(int idremark) {
 		this.idremark = idremark;
+	}
+
+	public boolean isAgainst() {
+		return this.against;
+	}
+
+	public void setAgainst(boolean against) {
+		this.against = against;
 	}
 
 	public String getRemarkValue() {
@@ -69,14 +75,6 @@ public class Remark implements Serializable {
 
 	public void setTopic(Topic topic) {
 		this.topic = topic;
-	}
-
-	public boolean isAgainst() {
-		return against;
-	}
-
-	public void setAgainst(boolean against) {
-		this.against = against;
 	}
 
 }

@@ -5,6 +5,9 @@
 	<persistence-unit name="OpenDiscourseJPA">
 		<class>opendiscourse.entity.Remark</class>
 		<class>opendiscourse.entity.Topic</class>
+		<class>opendiscourse.entity.User</class>
+		<class>opendiscourse.entity.UserTopic</class>
+		<class>opendiscourse.entity.UserTopicPK</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />

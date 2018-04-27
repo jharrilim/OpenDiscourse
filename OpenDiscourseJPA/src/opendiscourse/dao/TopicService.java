@@ -15,6 +15,7 @@ import javax.persistence.RollbackException;
 
 import opendiscourse.entity.Remark;
 import opendiscourse.entity.Topic;
+import opendiscourse.entity.User;
 
 public class TopicService {
 
@@ -64,4 +65,16 @@ public class TopicService {
 		}
 	}
 	
+	public static void registerUser(User user) {
+		EntityTransaction et = em.getTransaction();
+		try {
+			et.begin();
+			em.persist(user);
+			em.flush();
+			et.commit();
+		}
+		catch (RollbackException e) {
+			LOGGER.log(Level.SEVERE, "Failed to register User.", e);			
+		}
+	}
 }

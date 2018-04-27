@@ -48,6 +48,12 @@
 								</a>
 							</li>
 							<li class="nav-item">
+								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Topics/New">
+									<i class="fa fa-plus fa-fw"></i>
+									<span class="d-none d-md-inline">&nbsp;New Topic</span>
+								</a>
+							</li>							
+							<li class="nav-item">
 								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Topics/Popular">
 									<i class="fa fa-fire fa-fw"></i>
 									<span class="d-none d-md-inline">&nbsp;Most Popular</span>

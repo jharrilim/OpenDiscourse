@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="Header.jsp" />
+<jsp:include page="./partial/Header.jsp" />
 
 <h2 class="text-center">Trending Topics</h2>
 
@@ -7,15 +7,15 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-header">
-				<span class="card-title"><c:out value="${ topic.getTopicValue() }"></c:out></span>
+				<h4 class="card-title"><c:out value="${ topic.getTopicValue() }"></c:out></h4>
 			</div>
 			<div class="card-body">
 				<div class="row">
 					<div class="col-6">
-						<h3>For</h3>
+						<h4>For</h4>
 					</div>
 					<div class="col-6">
-						<h3>Against</h3>
+						<h4>Against</h4>
 					</div>
 				</div>
 				<div class="row">
@@ -38,19 +38,19 @@
 				</div>
 			</div>
 			<div class="card-footer">
-				<span class="card-subtitle">Post Remark</span>
+				<h6 class="card-subtitle">Write Remark</h6>
 				<form action="${pageContext.request.contextPath}/AddRemark" method="POST">
 					<input type="hidden" name="topicId" value="${ topic.getIdTopic() }" />
 					<div class="row">
 						<textarea class="form-control col-xs-12" name="remarkValue"></textarea>
 					</div>
 					<div class="row">
-						<div id="topicBtnGrp" class="btn btn-group-toggle col-xs-4" data-toggle="buttons">
-							<label class="btn btn-secondary active"><input type="radio" name="topicType" id="typeFor" value="for" checked />For</label>
-							<label class="btn btn-secondary"><input type="radio" name="topicType" id="typeAgainst" value="against" />Against</label>
-						</div>								
-						<div class="col-xs-8">
-							<input class="btn btn-lg btn-outline-primary pull-right text-right" type="submit" value="Submit" />
+						<div class="btn-group" role="group">
+							<div id="topicBtnGrp" class="btn btn-group-toggle col-xs-4" data-toggle="buttons">
+								<label class="btn btn-secondary active"><input type="radio" name="topicType" id="typeFor" value="for" checked />For</label>
+								<label class="btn btn-secondary"><input type="radio" name="topicType" id="typeAgainst" value="against" />Against</label>
+							</div>								
+							<input class="btn btn-outline-primary" type="submit" value="Submit" />						
 						</div>
 					</div>	
 				</form>
@@ -58,4 +58,4 @@
 		</div>
 	</div>
 </c:forEach>
-<jsp:include page="Footer.jsp" />
+<jsp:include page="./partial/Footer.jsp" />

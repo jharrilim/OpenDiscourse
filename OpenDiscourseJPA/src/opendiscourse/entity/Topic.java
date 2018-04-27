@@ -6,27 +6,33 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * The persistent class for the topic database table.
  * 
  */
 @Entity
-@NamedQuery(name = "Topic.findAll", query = "SELECT t FROM Topic t")
+@NamedQuery(name="Topic.findAll", query="SELECT t FROM Topic t")
 public class Topic implements Serializable {
 
-	private static final long serialVersionUID = 1490476297228543367L;
+	private static final long serialVersionUID = 2142213725500793981L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idTopic;
 
 	private String topicValue;
 
-	// bi-directional many-to-one association to Remark
-	@OneToMany(mappedBy = "topic")
+	//bi-directional many-to-one association to Remark
+	@OneToMany(mappedBy="topic")
 	private List<Remark> remarks;
 
+	//bi-directional many-to-many association to User
+	@ManyToMany(mappedBy="topics")
+	private List<User> users;
+	
 	public List<Remark> getPros() {
-		List<Remark> pros = new ArrayList<>();
+		ArrayList<Remark> pros = new ArrayList<>();
 		for (Remark remark : remarks) {
 			if (!remark.isAgainst())
 				pros.add(remark);
@@ -35,14 +41,14 @@ public class Topic implements Serializable {
 	}
 
 	public List<Remark> getCons() {
-		List<Remark> cons = new ArrayList<>();
+		ArrayList<Remark> cons = new ArrayList<>();
 		for (Remark remark : remarks) {
 			if (remark.isAgainst())
 				cons.add(remark);
 		}
 		return cons;
-	}	
-	
+	}
+
 	public int getIdTopic() {
 		return this.idTopic;
 	}
@@ -79,6 +85,14 @@ public class Topic implements Serializable {
 		remark.setTopic(null);
 
 		return remark;
+	}
+
+	public List<User> getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 }

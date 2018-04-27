@@ -1,4 +1,4 @@
-package opendiscourse.servlet;
+package opendiscourse.servlet.auth;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
