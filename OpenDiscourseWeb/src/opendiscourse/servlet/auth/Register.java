@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.EntityExistsException;
+import javax.persistence.PersistenceException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +30,8 @@ public class Register extends HttpServlet {
 		try {
 			LOGGER.log(Level.INFO, ()-> "Serving Registration Page.");
 			request.getRequestDispatcher("/WEB-INF/Registration.jsp").forward(request, response);
-		} catch (IOException | ServletException e) {
+		} 
+		catch (IOException | ServletException e) {
 			LOGGER.log(Level.SEVERE, "Could not get registration page.", e);
 		}
 	}
@@ -36,23 +39,31 @@ public class Register extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		String password = request.getParameter("password");
-		if (!password.equals(request.getParameter("confirmPassword"))) {
+		String confirmPassword = request.getParameter("confirmPassword");
+		if (!password.equals(confirmPassword)) {
+			LOGGER.info(()-> String.format("Passwords do not match: %s and %s", password, confirmPassword));
 			request.setAttribute("error", "Passwords do not match.");
 			doGet(request, response);
 			return;
 		}
-
+		LOGGER.info(()-> "Valid user. attempting to persist.");
 		User user = new User();
 		user.setUsername(request.getParameter("username"));
 		user.setPassword(password);
 		user.setEmail(request.getParameter("email"));
-		TopicService.registerUser(user);
-		request.getSession().setAttribute("user", user);
 		try {
-			response.sendRedirect(request.getRequestURI());	
+			TopicService.registerUser(user);			
+			request.getSession().setAttribute("user", user);
+			response.sendRedirect(request.getContextPath()+"/");			
 		}
 		catch(IOException e) {
-			LOGGER.log(Level.SEVERE, () -> "Could not redirect to: " + request.getRequestURI());
+			LOGGER.log(Level.SEVERE, () -> "Could not redirect to: " + request.getContextPath() + "/");
+		}
+		catch (PersistenceException e) {
+			LOGGER.info(()-> "User already exists.");
+			request.setAttribute("error", "Username already exists.");
+			doGet(request, response);
+			return;
 		}
 	}
 

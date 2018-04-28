@@ -4,14 +4,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
 import javax.persistence.Persistence;
 import javax.persistence.RollbackException;
-
-
-
 
 import opendiscourse.entity.Remark;
 import opendiscourse.entity.Topic;
@@ -72,6 +70,11 @@ public class TopicService {
 			em.persist(user);
 			em.flush();
 			et.commit();
+			LOGGER.info(()-> "Committed...");
+		}
+		catch (EntityExistsException e) {
+			LOGGER.log(Level.WARNING, "User already exists. Rethrowing.", e);
+			throw e;
 		}
 		catch (RollbackException e) {
 			LOGGER.log(Level.SEVERE, "Failed to register User.", e);			

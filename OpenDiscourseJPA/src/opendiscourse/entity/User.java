@@ -11,10 +11,11 @@ import java.util.List;
 @Entity
 @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -6308335746081551445L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int iduser;
 
 	private String email;
@@ -32,9 +33,6 @@ public class User implements Serializable {
 	// bi-directional many-to-one association to UserTopic
 	@OneToMany(mappedBy = "user")
 	private List<UserTopic> userTopics;
-
-	public User() {
-	}
 
 	public int getIduser() {
 		return this.iduser;

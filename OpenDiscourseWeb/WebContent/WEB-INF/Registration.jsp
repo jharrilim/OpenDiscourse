@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="./partial/Header.jsp" />
 	<div>
-		<h3>Register</h3>
-		<form action="${pageContext.request.contextPath}/Auth/Register">
+		<h3>Join OpenDiscourse</h3>
+		<form action="${pageContext.request.contextPath}/Auth/Register" method="POST">
 			<div class="form-group">
 				<label class="label">Username</label>
 				<input class="form-control" type="text" placeholder="Username" name="username" id="username" required />
@@ -19,7 +19,11 @@
 				<label class="label">Confirm Password</label>
 				<input class="form-control" type="password" name="confirmPassword" id="confirmPassword" required />
 			</div>
-			<div id="errormsg"></div>
+			<c:if test="${not empty error }">
+			<div id="errormsg" class="alert alert-danger" role="alert">
+				<c:out value="${ error }"></c:out>
+			</div>
+			</c:if>
 			<div class="form-group">
 				<input type="submit" value="Register" />
 			</div>
