@@ -1,7 +1,6 @@
 package opendiscourse.servlet.auth;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import opendiscourse.dao.TopicService;
-import opendiscourse.entity.Topic;
 import opendiscourse.entity.User;
 import opendiscourse.servlet.common.HomeServlet;
 
@@ -42,7 +40,6 @@ public class Login extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-		// get user from db
 		User user = TopicService.authenticateUser(
 				request.getParameter("username"), 
 				request.getParameter("password"));
