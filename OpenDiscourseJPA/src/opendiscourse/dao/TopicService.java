@@ -1,5 +1,6 @@
 package opendiscourse.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,6 +67,20 @@ public class TopicService {
 			et.rollback();
 			LOGGER.log(Level.SEVERE, "Failed to add Remark.", e);
 		}
+	}
+	
+	public static List<Topic> searchTopic(String search) {
+		List<Topic> topics = em.createNamedQuery("Topic.findIn", Topic.class)
+			.setParameter("arg1", "%" + search + "%")
+			.getResultList();
+
+		if (topics == null) {
+			LOGGER.info(()-> "Did not find any results.");
+			return new ArrayList<>();
+		}
+
+		LOGGER.info(()-> "Found " + topics.size() + " results.");		
+		return topics;
 	}
 	
 	public static void registerUser(User user) {
