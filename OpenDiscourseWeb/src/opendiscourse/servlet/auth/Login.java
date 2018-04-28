@@ -28,8 +28,6 @@ public class Login extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<Topic> topics = TopicService.all();
-			request.setAttribute("topics", topics);
 			request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
 			
 		} catch (ServletException | IOException e) {
@@ -45,8 +43,21 @@ public class Login extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		// get user from db
-		// if username is found with matching password
-		// add user to session
+		User user = TopicService.authenticateUser(
+				request.getParameter("username"), 
+				request.getParameter("password"));
+		if (user != null) {
+			request.getSession().setAttribute("user", user);
+			try {
+				request.getRequestDispatcher(request.getContextPath() + "/").forward(request, response);
+			} catch (ServletException | IOException e) {
+				LOGGER.log(Level.SEVERE, "Could not send user back to home page after login.", e);
+			}
+		}
+		else {
+			request.setAttribute("error", "Invalid login. Please try again.");
+			doGet(request, response);
+		}
 	}
 
 }

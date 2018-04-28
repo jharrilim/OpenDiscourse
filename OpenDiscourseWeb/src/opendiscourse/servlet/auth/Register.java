@@ -54,9 +54,9 @@ public class Register extends HttpServlet {
 		try {
 			TopicService.registerUser(user);			
 			request.getSession().setAttribute("user", user);
-			response.sendRedirect(request.getContextPath()+"/");			
+			request.getRequestDispatcher(request.getContextPath() + "/").forward(request, response);
 		}
-		catch(IOException e) {
+		catch(ServletException | IOException e) {
 			LOGGER.log(Level.SEVERE, () -> "Could not redirect to: " + request.getContextPath() + "/");
 		}
 		catch (PersistenceException e) {

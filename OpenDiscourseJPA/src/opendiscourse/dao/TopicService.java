@@ -8,6 +8,8 @@ import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Persistence;
 import javax.persistence.RollbackException;
 
@@ -16,7 +18,8 @@ import opendiscourse.entity.Topic;
 import opendiscourse.entity.User;
 
 public class TopicService {
-
+	// TODO: Break this up into multiple services
+	
 	private static final Logger LOGGER;
 	private static final EntityManager em;
 
@@ -78,6 +81,22 @@ public class TopicService {
 		}
 		catch (RollbackException e) {
 			LOGGER.log(Level.SEVERE, "Failed to register User.", e);			
+		}
+	}
+	
+	public static User authenticateUser(String username, String password) {
+		try {
+			return em.createNamedQuery("User.authenticate", User.class)
+			.setParameter("arg1", username)
+			.setParameter("arg2", password).getSingleResult();			
+		}
+		catch (NoResultException e) {
+			LOGGER.warning(()-> "Could not authenticate user: " + username);
+			return null;
+		}
+		catch (NonUniqueResultException e) {
+			LOGGER.log(Level.SEVERE, "Malformed data: Multiple users with the name: '" + username + "' exist.", e);
+			return null;
 		}
 	}
 }

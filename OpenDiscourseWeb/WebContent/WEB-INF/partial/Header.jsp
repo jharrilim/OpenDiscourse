@@ -29,7 +29,7 @@
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark hidden-sm-down justify-content-between">
 		<a class="navbar-brand" href="${pageContext.request.contextPath}/">( | )OpenDiscourse</a>
 		<form class="form-inline my-2 my-lg-0">
-			<c:if test="${ user }">
+			<c:if test="${ not empty user }">
 				<span class="navbar-text"><c:out value="${ user.getUsername() }"></c:out></span>
 			</c:if>
 	    	<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
