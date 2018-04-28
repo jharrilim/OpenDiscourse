@@ -1,4 +1,4 @@
-package opendiscourse.servlet.auth;
+package opendiscourse.servlet.topic;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -13,25 +13,29 @@ import javax.servlet.http.HttpServletResponse;
 import opendiscourse.servlet.common.Home;
 
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class MostRecent
  */
-@WebServlet("/Auth/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/About")
+public class About extends HttpServlet {
 
-    private static final long serialVersionUID = 2202203044463331313L;
+	private static final long serialVersionUID = -8890719371893643775L;
 	private static final Logger LOGGER = Logger.getLogger(Home.class.getName());
-	
-    @Override
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-		request.getSession().setAttribute("user", null);
 		try {
-			response.sendRedirect(request.getContextPath() + "/");
-		} catch (IOException e) {
-			LOGGER.log(Level.SEVERE, "Could not redirect to home page.", e);
+			request.getRequestDispatcher("/WEB-INF/About.jsp").forward(request, response);
+
+		} catch (ServletException | IOException e) {
+			try {
+				response.sendRedirect(request.getContextPath() + "/");
+			} catch (IOException e1) {
+				LOGGER.log(Level.SEVERE, "Malformed Response", e1);
+			}
 		}
 	}
 
-    @Override
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		doGet(request, response);
 	}

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import opendiscourse.dao.TopicService;
 import opendiscourse.entity.User;
-import opendiscourse.servlet.common.HomeServlet;
+import opendiscourse.servlet.common.Home;
 
 /**
  * Servlet implementation class Login
@@ -21,7 +21,7 @@ import opendiscourse.servlet.common.HomeServlet;
 public class Login extends HttpServlet {
 
 	private static final long serialVersionUID = 6085682488301638703L;
-	private static final Logger LOGGER = Logger.getLogger(HomeServlet.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Home.class.getName());
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {

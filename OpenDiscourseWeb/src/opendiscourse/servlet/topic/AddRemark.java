@@ -1,4 +1,4 @@
-package opendiscourse.servlet.topics;
+package opendiscourse.servlet.topic;
 
 import java.io.IOException;
 import java.util.logging.Level;

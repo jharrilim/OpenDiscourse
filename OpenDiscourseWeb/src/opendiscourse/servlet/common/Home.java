@@ -12,25 +12,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import opendiscourse.dao.TopicService;
-import opendiscourse.entity.Remark;
 import opendiscourse.entity.Topic;
 
 /**
  * For the main page of the OpenDiscourse application.
  */
 @WebServlet(description = "Access the main page of the application.", 
-urlPatterns = { "/Index", "/", "/Home" })
-public class HomeServlet extends HttpServlet {
+urlPatterns = { "/", "/Recent" })
+public class Home extends HttpServlet {
 
 	private static final long serialVersionUID = -8842471261332777447L;
-	private static final Logger LOGGER = Logger.getLogger(HomeServlet.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(Home.class.getName());
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			List<Topic> topics = TopicService.all();
 			request.setAttribute("topics", topics);
-			request.getRequestDispatcher("/WEB-INF/Home.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/MostRecent.jsp").forward(request, response);
 			
 		} catch (ServletException | IOException e) {
 			try {

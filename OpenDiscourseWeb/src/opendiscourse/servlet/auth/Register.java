@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import opendiscourse.dao.TopicService;
 import opendiscourse.entity.User;
-import opendiscourse.servlet.topics.AddTopic;
+import opendiscourse.servlet.topic.AddTopic;
 
 /**
  * Servlet implementation class Register

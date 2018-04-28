@@ -63,12 +63,6 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Topics/Recent">
-									<i class="fa fa-clock fa-fw"></i>
-									<span class="d-none d-md-inline">&nbsp;Most Recent</span>
-								</a>
-							</li>
-							<li class="nav-item">
 								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Favourites">
 									<i class="fa fa-heart fa-fw"></i>
 									<span class="d-none d-md-inline">&nbsp;Favourites</span>
@@ -104,6 +98,12 @@
 							</li>
 								</c:otherwise>
 							</c:choose>
+							<li class="nav-item">
+								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/About">
+									<i class="fa fa-balance-scale fa-fw"></i>
+									<span class="d-none d-md-inline">&nbsp;About</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</nav>
