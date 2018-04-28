@@ -1,6 +1,7 @@
 package opendiscourse.servlet.topic;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import opendiscourse.entity.Topic;
+import opendiscourse.entity.User;
 import opendiscourse.guard.AuthGuard;
 import opendiscourse.dao.TopicService;
 
@@ -41,8 +43,11 @@ public class AddTopic extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 		String topicValue = request.getParameter("topicValue");
+		User user = (User) request.getSession().getAttribute("user");
 		Topic topic = new Topic();
 		topic.setTopicValue(topicValue);
+		topic.setDatePosted(new Date());
+		topic.setUser(user);
 		TopicService.addTopic(topic);
 		try {
 			response.sendRedirect(request.getContextPath() + "/Topics");

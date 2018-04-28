@@ -5,10 +5,10 @@
 		<h3>Post A Topic</h3>
 		<p class="lead">Write a topic that you believe will generate good discussion. Make sure your topic has a defined
 		boundary in which you can either argue for it or against it.</p>
-		<form action="${pageContext.request.contextPath}/Topics/New">
+		<form action="${pageContext.request.contextPath}/Topics/New" method="POST">
 			<div class="form-group">
 				<label>Topic</label>
-				<input class="form-control" type="text" name="topic" id="topic" />
+				<input class="form-control" type="text" name="topicValue" id="topic" />
 			</div>
 			<div class="form-group">
 				<input class="btn btn-secondary" type="submit" />

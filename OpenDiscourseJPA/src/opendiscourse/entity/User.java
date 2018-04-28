@@ -2,7 +2,9 @@ package opendiscourse.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
+
 
 /**
  * The persistent class for the user database table.
@@ -14,11 +16,14 @@ import java.util.List;
 @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
 public class User implements Serializable {
 
-	private static final long serialVersionUID = -6308335746081551445L;
+	private static final long serialVersionUID = 8556417425200830114L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int iduser;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateJoined;
 
 	private String email;
 
@@ -26,15 +31,16 @@ public class User implements Serializable {
 
 	private String username;
 
-	// bi-directional many-to-many association to Topic
-	@ManyToMany
-	@JoinTable(name = "user_topics", joinColumns = { @JoinColumn(name = "iduser") }, inverseJoinColumns = {
-			@JoinColumn(name = "idtopic") })
+	//bi-directional many-to-one association to Remark
+	@OneToMany(mappedBy="user")
+	private List<Remark> remarks;
+
+	//bi-directional many-to-one association to Topic
+	@OneToMany(mappedBy="user")
 	private List<Topic> topics;
 
-	// bi-directional many-to-one association to UserTopic
-	@OneToMany(mappedBy = "user")
-	private List<UserTopic> userTopics;
+	public User() {
+	}
 
 	public int getIduser() {
 		return this.iduser;
@@ -42,6 +48,14 @@ public class User implements Serializable {
 
 	public void setIduser(int iduser) {
 		this.iduser = iduser;
+	}
+
+	public Date getDateJoined() {
+		return this.dateJoined;
+	}
+
+	public void setDateJoined(Date dateJoined) {
+		this.dateJoined = dateJoined;
 	}
 
 	public String getEmail() {
@@ -68,6 +82,28 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
+	public List<Remark> getRemarks() {
+		return this.remarks;
+	}
+
+	public void setRemarks(List<Remark> remarks) {
+		this.remarks = remarks;
+	}
+
+	public Remark addRemark(Remark remark) {
+		getRemarks().add(remark);
+		remark.setUser(this);
+
+		return remark;
+	}
+
+	public Remark removeRemark(Remark remark) {
+		getRemarks().remove(remark);
+		remark.setUser(null);
+
+		return remark;
+	}
+
 	public List<Topic> getTopics() {
 		return this.topics;
 	}
@@ -76,26 +112,18 @@ public class User implements Serializable {
 		this.topics = topics;
 	}
 
-	public List<UserTopic> getUserTopics() {
-		return this.userTopics;
+	public Topic addTopic(Topic topic) {
+		getTopics().add(topic);
+		topic.setUser(this);
+
+		return topic;
 	}
 
-	public void setUserTopics(List<UserTopic> userTopics) {
-		this.userTopics = userTopics;
-	}
+	public Topic removeTopic(Topic topic) {
+		getTopics().remove(topic);
+		topic.setUser(null);
 
-	public UserTopic addUserTopic(UserTopic userTopic) {
-		getUserTopics().add(userTopic);
-		userTopic.setUser(this);
-
-		return userTopic;
-	}
-
-	public UserTopic removeUserTopic(UserTopic userTopic) {
-		getUserTopics().remove(userTopic);
-		userTopic.setUser(null);
-
-		return userTopic;
+		return topic;
 	}
 
 }

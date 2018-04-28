@@ -40,18 +40,22 @@ public class Login extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		LOGGER.info(()-> "Attempting to authenticate user.");
 		User user = TopicService.authenticateUser(
 				request.getParameter("username"), 
 				request.getParameter("password"));
 		if (user != null) {
+			LOGGER.info(()-> "Successfully authenticated user.");
 			request.getSession().setAttribute("user", user);
 			try {
-				request.getRequestDispatcher(request.getContextPath() + "/").forward(request, response);
-			} catch (ServletException | IOException e) {
+				response.sendRedirect(request.getContextPath() + "/");
+				//request.getRequestDispatcher("/WEB-INF/MostRecent.jsp").forward(request, response);
+			} catch (IOException e) {
 				LOGGER.log(Level.SEVERE, "Could not send user back to home page after login.", e);
 			}
 		}
 		else {
+			LOGGER.info(()-> "Could not authenticate user.");
 			request.setAttribute("error", "Invalid login. Please try again.");
 			doGet(request, response);
 		}

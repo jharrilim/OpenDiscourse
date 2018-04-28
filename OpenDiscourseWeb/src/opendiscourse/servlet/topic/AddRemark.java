@@ -1,6 +1,7 @@
 package opendiscourse.servlet.topic;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import opendiscourse.entity.Remark;
 import opendiscourse.entity.Topic;
+import opendiscourse.entity.User;
 import opendiscourse.dao.TopicService;
 
 @WebServlet("/AddRemark")
@@ -33,14 +35,20 @@ public class AddRemark extends HttpServlet {
 		try {
 			String topicType = request.getParameter("topicType");
 			String remarkValue = request.getParameter("remarkValue");
+			User user = (User) request.getSession().getAttribute("user");
 			int topicId = Integer.parseInt(request.getParameter("topicId"));
+			
 			Topic topic = TopicService.getTopicById(topicId);
 			Remark remark = new Remark();
 			remark.setRemarkValue(remarkValue);
 			remark.setAgainst("against".equals(topicType));
 			remark.setTopic(topic);
+			remark.setDatePosted(new Date());
+			remark.setUser(user);
 			topic.addRemark(remark);
-			TopicService.addRemark(remark);
+			TopicService.addRemark(remark);				
+		
+
 			LOGGER.log(Level.INFO, () -> String.format("Topic Type: %s", topicType));
 		}
 		catch(NumberFormatException e) {

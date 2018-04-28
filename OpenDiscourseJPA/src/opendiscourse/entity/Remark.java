@@ -2,6 +2,7 @@ package opendiscourse.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -11,12 +12,17 @@ import javax.persistence.*;
 @Entity
 @NamedQuery(name="Remark.findAll", query="SELECT r FROM Remark r")
 public class Remark implements Serializable {
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = -6037155732372535528L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idremark;
 
 	private boolean against;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date datePosted;
 
 	private String remarkValue;
 
@@ -28,6 +34,14 @@ public class Remark implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idTopic")
 	private Topic topic;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne
+	@JoinColumn(name="idUser")
+	private User user;
+
+	public Remark() {
+	}
 
 	public int getIdremark() {
 		return this.idremark;
@@ -43,6 +57,14 @@ public class Remark implements Serializable {
 
 	public void setAgainst(boolean against) {
 		this.against = against;
+	}
+
+	public Date getDatePosted() {
+		return this.datePosted;
+	}
+
+	public void setDatePosted(Date datePosted) {
+		this.datePosted = datePosted;
 	}
 
 	public String getRemarkValue() {
@@ -75,6 +97,14 @@ public class Remark implements Serializable {
 
 	public void setTopic(Topic topic) {
 		this.topic = topic;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

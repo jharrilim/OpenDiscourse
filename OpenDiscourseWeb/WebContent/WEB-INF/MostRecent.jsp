@@ -22,7 +22,8 @@
 					<div class="col-6">
 						<c:forEach var="pro" items="${ topic.getPros() }">
 							<div>
-								<c:out value="${ pro.getRemarkValue() }"></c:out>
+								<p><c:out value="${ pro.getRemarkValue() }"></c:out></p>
+								<p class="text-right">- ${ pro.getUser().getUsername() }</p>
 							</div>
 							<hr />
 						</c:forEach>
@@ -30,7 +31,10 @@
 					<div class="col-6">
 						<c:forEach var="con" items="${ topic.getCons() }">
 							<div class="text-xs-right">
-								<c:out value="${ con.getRemarkValue() }"></c:out>
+								<div>
+									<p><c:out value="${ con.getRemarkValue() }"></c:out></p>
+									<p class="text-right">- ${ con.getUser().getUsername() }</p>
+								</div>
 							</div>
 							<hr />
 						</c:forEach>

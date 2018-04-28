@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -15,11 +16,18 @@ import java.util.List;
 @NamedQuery(name="Topic.findAll", query="SELECT t FROM Topic t")
 public class Topic implements Serializable {
 
-	private static final long serialVersionUID = 2142213725500793981L;
+	private static final long serialVersionUID = 8727247010444968906L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idTopic;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date datePosted;
+
+	private int thumbsDown;
+
+	private int thumbsUp;
 
 	private String topicValue;
 
@@ -27,34 +35,70 @@ public class Topic implements Serializable {
 	@OneToMany(mappedBy="topic")
 	private List<Remark> remarks;
 
-	//bi-directional many-to-many association to User
-	@ManyToMany(mappedBy="topics")
-	private List<User> users;
-	
+	//bi-directional many-to-one association to User
+	@ManyToOne
+	@JoinColumn(name="idUser")
+	private User user;
+
+	public Topic() {
+	}
+
 	public List<Remark> getPros() {
 		ArrayList<Remark> pros = new ArrayList<>();
-		for (Remark remark : remarks) {
-			if (!remark.isAgainst())
-				pros.add(remark);
+		if (remarks != null) {
+			for (Remark r : remarks) {
+				if (!r.isAgainst()) {
+					pros.add(r);
+				}
+			}
+			
 		}
 		return pros;
 	}
-
+	
 	public List<Remark> getCons() {
 		ArrayList<Remark> cons = new ArrayList<>();
-		for (Remark remark : remarks) {
-			if (remark.isAgainst())
-				cons.add(remark);
+		if (remarks != null) {
+			for (Remark r : remarks) {
+				if (r.isAgainst()) {
+					cons.add(r);
+				}
+			}
+			
 		}
 		return cons;
 	}
-
+	
 	public int getIdTopic() {
 		return this.idTopic;
 	}
 
 	public void setIdTopic(int idTopic) {
 		this.idTopic = idTopic;
+	}
+
+	public Date getDatePosted() {
+		return this.datePosted;
+	}
+
+	public void setDatePosted(Date datePosted) {
+		this.datePosted = datePosted;
+	}
+
+	public int getThumbsDown() {
+		return this.thumbsDown;
+	}
+
+	public void setThumbsDown(int thumbsDown) {
+		this.thumbsDown = thumbsDown;
+	}
+
+	public int getThumbsUp() {
+		return this.thumbsUp;
+	}
+
+	public void setThumbsUp(int thumbsUp) {
+		this.thumbsUp = thumbsUp;
 	}
 
 	public String getTopicValue() {
@@ -87,12 +131,12 @@ public class Topic implements Serializable {
 		return remark;
 	}
 
-	public List<User> getUsers() {
-		return this.users;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

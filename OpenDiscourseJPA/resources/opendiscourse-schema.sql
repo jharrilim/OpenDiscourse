@@ -18,16 +18,46 @@ CREATE SCHEMA IF NOT EXISTS `opendiscourse` DEFAULT CHARACTER SET latin1 ;
 USE `opendiscourse` ;
 
 -- -----------------------------------------------------
+-- Table `opendiscourse`.`user`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `opendiscourse`.`user` ;
+
+CREATE TABLE IF NOT EXISTS `opendiscourse`.`user` (
+  `iduser` INT(11) NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(100) NOT NULL,
+  `username` VARCHAR(30) NOT NULL,
+  `password` VARCHAR(50) NOT NULL,
+  `dateJoined` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`iduser`),
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
+  UNIQUE INDEX `iduser_UNIQUE` (`iduser` ASC),
+  UNIQUE INDEX `iduser_idx_UNIQUE` (`iduser` ASC))
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
 -- Table `opendiscourse`.`topic`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `opendiscourse`.`topic` ;
 
 CREATE TABLE IF NOT EXISTS `opendiscourse`.`topic` (
   `idTopic` INT(11) NOT NULL AUTO_INCREMENT,
+  `idUser` INT(11) NOT NULL,
   `topicValue` VARCHAR(500) NOT NULL,
-  PRIMARY KEY (`idTopic`))
+  `thumbsUp` INT(11) NULL DEFAULT '0',
+  `thumbsDown` INT(11) NULL DEFAULT '0',
+  `datePosted` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idTopic`),
+  INDEX `fk_to_iduser_idx` (`idUser` ASC),
+  CONSTRAINT `fk_to_iduser`
+    FOREIGN KEY (`idUser`)
+    REFERENCES `opendiscourse`.`user` (`iduser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -39,56 +69,22 @@ DROP TABLE IF EXISTS `opendiscourse`.`remark` ;
 CREATE TABLE IF NOT EXISTS `opendiscourse`.`remark` (
   `idremark` INT(11) NOT NULL AUTO_INCREMENT,
   `idTopic` INT(11) NOT NULL,
+  `idUser` INT(11) NOT NULL,
   `remarkValue` VARCHAR(1000) NOT NULL,
   `against` TINYINT(4) NOT NULL,
   `thumbsUp` INT(11) NULL DEFAULT '0',
   `thumbsDown` INT(11) NULL DEFAULT '0',
+  `datePosted` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idremark`),
   INDEX `fk_idtopic_idx` (`idTopic` ASC),
+  INDEX `fk_re_iduser_idx` (`idUser` ASC),
   CONSTRAINT `fk_idtopic`
     FOREIGN KEY (`idTopic`)
     REFERENCES `opendiscourse`.`topic` (`idTopic`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 13
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `opendiscourse`.`user`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `opendiscourse`.`user` ;
-
-CREATE TABLE IF NOT EXISTS `opendiscourse`.`user` (
-  `iduser` INT(11) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `username` VARCHAR(30) NOT NULL,
-  `password` VARCHAR(50) NULL DEFAULT NULL,
-  PRIMARY KEY (`iduser`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `opendiscourse`.`user_topics`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `opendiscourse`.`user_topics` ;
-
-CREATE TABLE IF NOT EXISTS `opendiscourse`.`user_topics` (
-  `iduser` INT(11) NOT NULL,
-  `idtopic` INT(11) NOT NULL,
-  PRIMARY KEY (`iduser`, `idtopic`),
-  INDEX `fk_idtopic_idx` (`idtopic` ASC),
-  INDEX `fk_ut_idtopic_idx` (`idtopic` ASC),
-  CONSTRAINT `fk_ut_idtopic`
-    FOREIGN KEY (`idtopic`)
-    REFERENCES `opendiscourse`.`topic` (`idTopic`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ut_iduser`
-    FOREIGN KEY (`iduser`)
+  CONSTRAINT `fk_re_iduser`
+    FOREIGN KEY (`idUser`)
     REFERENCES `opendiscourse`.`user` (`iduser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

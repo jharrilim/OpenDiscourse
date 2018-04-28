@@ -49,6 +49,7 @@ public class TopicService {
 			et.commit();
 		}
 		catch (RollbackException e) {
+			et.rollback();
 			LOGGER.log(Level.SEVERE, "Failed to add Topic.", e);
 		}
 	}
@@ -62,6 +63,7 @@ public class TopicService {
 			et.commit();
 		}
 		catch (RollbackException e) {
+			et.rollback();
 			LOGGER.log(Level.SEVERE, "Failed to add Remark.", e);
 		}
 	}
@@ -76,6 +78,7 @@ public class TopicService {
 			LOGGER.info(()-> "Committed...");
 		}
 		catch (EntityExistsException e) {
+			et.rollback();
 			LOGGER.log(Level.WARNING, "User already exists. Rethrowing.", e);
 			throw e;
 		}

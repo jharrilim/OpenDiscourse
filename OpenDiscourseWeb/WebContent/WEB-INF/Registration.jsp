@@ -25,7 +25,7 @@
 			</div>
 			</c:if>
 			<div class="form-group">
-				<input type="submit" value="Register" />
+				<input class="btn btn-default" type="submit" value="Register" />
 			</div>
 		</form>
 	</div>
