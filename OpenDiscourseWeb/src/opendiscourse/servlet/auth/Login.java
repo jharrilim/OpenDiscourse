@@ -44,18 +44,9 @@ public class Login extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-		User user = new User();
-		user.setUsername(request.getParameter("username"));
-		user.setPassword(request.getParameter("password"));
-		user.setEmail(request.getParameter("email"));
-		TopicService.registerUser(user);
-		request.getSession().setAttribute("user", user);
-		try {
-			response.sendRedirect(request.getRequestURI());			
-		}
-		catch(IOException e) {
-			
-		}
+		// get user from db
+		// if username is found with matching password
+		// add user to session
 	}
 
 }

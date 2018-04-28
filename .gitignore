@@ -1,7 +1,5 @@
 .metadata
 
-**/.classpath
-**/.project
 .sonarlint
 **/.recommenders
 **/.settings
