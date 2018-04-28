@@ -49,13 +49,7 @@
 									<i class="fa fa-home fa-fw"></i>
 									<span class="font-weight-bold">&nbsp;Home</span>
 								</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Topics/New">
-									<i class="fa fa-plus fa-fw"></i>
-									<span class="d-none d-md-inline">&nbsp;New Topic</span>
-								</a>
-							</li>							
+							</li>						
 							<li class="nav-item">
 								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Topics/Popular">
 									<i class="fa fa-fire fa-fw"></i>
@@ -66,6 +60,12 @@
 								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Favourites">
 									<i class="fa fa-heart fa-fw"></i>
 									<span class="d-none d-md-inline">&nbsp;Favourites</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/About">
+									<i class="fa fa-balance-scale fa-fw"></i>
+									<span class="d-none d-md-inline">&nbsp;About</span>
 								</a>
 							</li>
 							<c:choose>
@@ -85,6 +85,12 @@
 								</c:when>
 								<c:otherwise>
 							<li class="nav-item">
+								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Topics/New">
+									<i class="fa fa-plus fa-fw"></i>
+									<span class="d-none d-md-inline">&nbsp;New Topic</span>
+								</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Profile">
 									<i class="fa fa-user fa-fw"></i>
 									<span class="d-none d-md-inline">&nbsp;Profile</span>
@@ -98,12 +104,6 @@
 							</li>
 								</c:otherwise>
 							</c:choose>
-							<li class="nav-item">
-								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/About">
-									<i class="fa fa-balance-scale fa-fw"></i>
-									<span class="d-none d-md-inline">&nbsp;About</span>
-								</a>
-							</li>
 						</ul>
 					</div>
 				</nav>
