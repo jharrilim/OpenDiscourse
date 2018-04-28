@@ -1,6 +1,9 @@
 package opendiscourse.entity;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -42,7 +45,7 @@ public class Remark implements Serializable {
 
 	public Remark() {
 	}
-
+	
 	public int getIdremark() {
 		return this.idremark;
 	}
