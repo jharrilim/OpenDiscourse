@@ -11,16 +11,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import opendiscourse.entity.Topic;
+import opendiscourse.guard.AuthGuard;
 import opendiscourse.dao.TopicService;
 
 @WebServlet("/Topics/New")
 public class AddTopic extends HttpServlet {
 
+	private static final long serialVersionUID = 5947926535456029423L;
 	private static final Logger LOGGER = Logger.getLogger(AddTopic.class.getName());
-	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+		if(!AuthGuard.isLoggedIn(request.getSession())) {
+			try {
+				response.sendRedirect(request.getContextPath() + "/Auth/Login");
+			} catch (IOException e) {
+				LOGGER.log(Level.SEVERE, "Could not redirect to login.", e);
+			}
+			return;
+		}
+		
 		try {
 			request.getRequestDispatcher("/WEB-INF/AddTopic.jsp").forward(request, response);
 		} catch (IOException | ServletException e) {
@@ -40,5 +50,4 @@ public class AddTopic extends HttpServlet {
 			LOGGER.log(Level.SEVERE, "Could not redirect from AddTopic.", e);
 		}
 	}
-
 }
