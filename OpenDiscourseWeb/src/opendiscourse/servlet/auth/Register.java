@@ -1,6 +1,7 @@
 package opendiscourse.servlet.auth;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,6 +51,7 @@ public class Register extends HttpServlet {
 		user.setUsername(request.getParameter("username"));
 		user.setPassword(password);
 		user.setEmail(request.getParameter("email"));
+		user.setDateJoined(new Date());
 		try {
 			TopicService.registerUser(user);			
 			request.getSession().setAttribute("user", user);
@@ -60,7 +62,7 @@ public class Register extends HttpServlet {
 		}
 		catch (PersistenceException e) {
 			LOGGER.info(()-> "User already exists.");
-			request.setAttribute("error", "Username already exists.");
+			request.setAttribute("error", e.getMessage());
 			doGet(request, response);
 			return;
 		}

@@ -24,6 +24,15 @@ public class Home extends HttpServlet {
 	private static final long serialVersionUID = -8842471261332777447L;
 	private static final Logger LOGGER = Logger.getLogger(Home.class.getName());
 
+	public Home() {
+		LOGGER.info("Constructing Home Servlet");
+	}
+	
+	@Override
+	public void init() {
+		LOGGER.info("Calling Home Init");
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 		try {

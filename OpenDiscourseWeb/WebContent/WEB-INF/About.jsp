@@ -14,7 +14,7 @@
 		<div class="lead">
 			<div class="btn-group">
 				<a class="btn btn-dark btn-lg" href="https://github.com/jharrilim/OpenDiscourse/" role="button">Github</a>
-				<a class="btn btn-primary btn-lg" href="#">Telegram</a>
+				<a class="btn btn-primary btn-lg" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Telegram</a>
 			</div>
 		</div>
 	</div>

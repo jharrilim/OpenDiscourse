@@ -45,8 +45,9 @@ public class Topic implements Serializable {
 	private User user;
 
 	public Topic() {
+		remarks = new ArrayList<>();
 	}
-
+	
 	public List<Remark> getPros() {
 		ArrayList<Remark> pros = new ArrayList<>();
 		if (remarks != null) {

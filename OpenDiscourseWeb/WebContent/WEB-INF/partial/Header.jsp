@@ -28,14 +28,16 @@
 
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark hidden-sm-down justify-content-between">
 		<a class="navbar-brand" href="${pageContext.request.contextPath}/">( | )OpenDiscourse</a>
-		<c:if test="${ not empty user }">
-			<a class="btn btn-outline-info" href="${pageContext.request.contextPath}/Profile"><c:out value="${ user.getUsername() }"></c:out></a>
-		</c:if>
-		<form class="form-inline my-2 my-lg-0" action="${pageContext.request.contextPath}/Search" method="POST">
-	    	<input class="form-control mr-sm-2" placeholder="Search Topics" aria-label="Search" name="search" id="search" />
-	    	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form>
-	</nav>
+		<div class="form-inline my-2 my-lg-0">
+			<c:if test="${ not empty user }">
+				<a class="btn btn-outline-info" href="${pageContext.request.contextPath}/Profile"><c:out value="${ user.getUsername() }"></c:out></a>
+			</c:if>
+			<form action="${pageContext.request.contextPath}/Search" method="POST">
+		    	<input class="form-control mr-sm-2" placeholder="Search Topics" aria-label="Search" name="search" id="search" />
+		    	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>	
+		</div>
+		</nav>
 
 	<!-- Sidebar -->
 	<div class="position-fixed container-fluid h-100">
@@ -57,7 +59,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Favourites">
+								<a class="nav-link pl-0" href="${pageContext.request.contextPath}/Topics/Favourites">
 									<i class="fa fa-heart fa-fw"></i>
 									<span class="d-none d-md-inline">&nbsp;Favourites</span>
 								</a>

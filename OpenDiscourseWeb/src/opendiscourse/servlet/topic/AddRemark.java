@@ -46,8 +46,7 @@ public class AddRemark extends HttpServlet {
 			remark.setDatePosted(new Date());
 			remark.setUser(user);
 			topic.addRemark(remark);
-			TopicService.addRemark(remark);				
-		
+			TopicService.addRemark(remark);
 
 			LOGGER.log(Level.INFO, () -> String.format("Topic Type: %s", topicType));
 		}

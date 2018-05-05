@@ -50,9 +50,9 @@
 					</div>
 					<div class="row">
 						<div class="btn-group" role="group">
-							<div id="topicBtnGrp" class="btn btn-group-toggle col-xs-4" data-toggle="buttons">
-								<label class="btn btn-secondary active"><input type="radio" name="topicType" id="typeFor" value="for" checked />For</label>
-								<label class="btn btn-secondary"><input type="radio" name="topicType" id="typeAgainst" value="against" />Against</label>
+							<div  class="btn btn-group-toggle col-xs-4" data-toggle="buttons">
+								<label class="btn btn-secondary active"><input type="radio" name="topicType" value="for" checked />For</label>
+								<label class="btn btn-secondary"><input type="radio" name="topicType" value="against" />Against</label>
 							</div>
 							<input class="btn btn-outline-primary" type="submit" value="Submit" />						
 						</div>
@@ -61,6 +61,7 @@
 			</div>
 		</div>
 	</div>
+	<br />
 </c:forEach>
 <br />
 <br />
